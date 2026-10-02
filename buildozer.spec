@@ -5,26 +5,18 @@ package.name = thermoplantio
 package.domain = org.thermoplant
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,txt
+source.include_exts = py,png,jpg,kv,atlas
 
-version = 0.1
+version = 1.0
 
 requirements = python3,kivy,plyer
 
 orientation = portrait
 fullscreen = 0
 
-# Permisos Android
-android.permissions = INTERNET
-
-# Arquitecturas Android
-android.archs = arm64-v8a, armeabi-v7a
-
-# Nombre del APK
-android.entrypoint = org.kivy.android.PythonActivity
-
+android.api = 33
+android.minapi = 24
 
 [buildozer]
 
 log_level = 2
-warn_on_root = 1
