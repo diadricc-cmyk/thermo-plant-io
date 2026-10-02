@@ -24,6 +24,7 @@ jobs:
             autoconf \
             automake \
             libtool \
+            libtool-bin \
             pkg-config \
             zlib1g-dev \
             libncurses5-dev \
@@ -39,15 +40,12 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade buildozer cython
 
-      - name: Preparar herramientas de compilación
+      - name: Comprobar herramientas
         run: |
           autoreconf --version
           autoconf --version
           automake --version
           libtool --version
-
-      - name: Configurar Buildozer
-        run: |
           buildozer --version
 
       - name: Construir APK
