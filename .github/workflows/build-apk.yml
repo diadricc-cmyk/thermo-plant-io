@@ -6,39 +6,41 @@ on:
 jobs:
   build:
     name: Build APK
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Descargar proyecto
         uses: actions/checkout@v4
 
       - name: Configurar Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Configurar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias
+      - name: Instalar herramientas
         run: |
           python -m pip install --upgrade pip
           pip install buildozer
           pip install cython
 
-      - name: Preparar Buildozer
+      - name: Instalar Android SDK Build Tools
         run: |
-          buildozer --version
+          yes | sdkmanager --licenses || true
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Construir APK
         run: |
-          buildozer -v android debug
+          yes | buildozer -v android debug
 
       - name: Guardar APK
         uses: actions/upload-artifact@v4
         with:
           name: thermoplantio-apk
           path: bin/*.apk
+
